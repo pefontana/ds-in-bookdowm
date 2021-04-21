@@ -12,6 +12,16 @@ the-difference-between-science-and-technology
 what-is-technology
 references
 meeting-julia
+why-julia
+julia-presentation
+installation
+first-steps-into-the-julia-world
+julias-ecosystem-basic-plotting-and-manipulation-of-dataframes
+plotting-with-plots.jl
+introducing-dataframes.jl
+summary
+references-1
+give-us-feedback
 probability-introduction
 spam-filter
 probabilistic-programming
