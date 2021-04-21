@@ -8,6 +8,9 @@ part-iv-deep-learning
 part-v-scientific-machine-learning
 part-vi-time-series-and-forecasting
 science-technology-and-epistemology
+the-difference-between-science-and-technology
+what-is-technology
+references
 meeting-julia
 probability-introduction
 spam-filter
