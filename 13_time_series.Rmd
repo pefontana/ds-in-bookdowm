@@ -1,3 +1,1 @@
-# (PART) Time Series and Forecasting {.unnumbered}
-
 # Time series
