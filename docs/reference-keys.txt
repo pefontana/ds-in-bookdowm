@@ -1,12 +1,3 @@
-open-source
-prologue
-table-of-contents
-part-i-data-science-and-julia
-part-ii-bayesian-statistics
-part-iii-machine-learning
-part-iv-deep-learning
-part-v-scientific-machine-learning
-part-vi-time-series-and-forecasting
 science-technology-and-epistemology
 the-difference-between-science-and-technology
 what-is-technology
