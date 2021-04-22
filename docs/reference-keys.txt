@@ -17,6 +17,11 @@ probability-introduction
 spam-filter
 probabilistic-programming
 escaping-from-mars
+calculating-the-constant-g-of-mars
+optimizing-the-throwing-angle
+calculating-the-escape-velocity
+summary-1
+give-us-feedback-1
 football-simulation
 basketball-shots
 optimal-pricing
