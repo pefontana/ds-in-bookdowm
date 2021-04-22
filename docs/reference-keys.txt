@@ -1,4 +1,3 @@
-science-technology-and-epistemology
 the-difference-between-science-and-technology
 what-is-technology
 references
@@ -28,8 +27,17 @@ summary-2
 give-us-feedback-2
 football-simulation
 basketball-shots
+modeling-the-probability-of-scoring
+prior-predictive-checks-part-i
+traceplot
+new-model-and-prior-predictive-checks-part-ii
+defining-the-new-model-and-computing-posteriors
+does-the-period-affect-the-probability-of-scoring
+summary-3
+give-us-feedback-3
 optimal-pricing
 image-classification
 ultima-online
 ultima-continued
 time-series
+science-technology-and-epistemology
