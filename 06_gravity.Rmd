@@ -3,9 +3,6 @@
 ```{julia, echo=FALSE}
 using Markdown
 using InteractiveUtils
-using Plots
-using Turing
-using StatsPlots
 ```
 
 Suppose you landed on Mars by mistake and you want to leave that rocky planet and return home. To escape from a planet you need a very important piece of information: the escaping velocity from the planet. 
@@ -15,15 +12,14 @@ What on Mars is the escape velocity?
 We are going to use the same experiment that Newton thought when thinking about escaping from the gravity of Earth. Gravity pulls us down, so if we shoot a cannonball, as in the sketch shown below, what will happen? For some velocities, the cannonball will return to Earth, but there's a velocity at which it scapes since the gravitational pull is not enough to bring it back to the surface. That velocity is called escape velocity.
 
 ```{julia} 
-
 begin 
   using Images
+  using Plots
 	im_0 = load("./06_gravity/images/cannonball_.png")
+	plot(im_0)
 	#img_small = imresize(im_0, ratio=1/3)
 
-	
 end
-
 ```
 To simplify, we approximate the escape velocity as:
 
@@ -33,7 +29,7 @@ where $r$ is the radius of the planet and $g$ the constant of gravity at the sur
 
 We remember that the gravity of Earth at its surface is $9.8\frac{m}{s^2}$, so all we need to estimate the escape velocity of Mars is the gravity of the planet at its surface. So we decide to make an experiment and gather some data. But what exactly do you need to measure? Let's see.
 
-We are going to calculate the constant $g_{mars}$ just throwing stones. We are going to explain a bit the equations regarding the experiment. The topic we need to revisit is *Proyectile Motion*. 
+We are going to calculate the constant $g_{mars}$ just throwing stones. We are going to explain a bit the equations regarding the experiment. The topic we need to revisit is Proyectile Motion. 
 
  ## Proyectile Motion
  
@@ -46,16 +42,14 @@ $\overrightarrow{F} = m * \overrightarrow{a}$
 
 In the figure below we show a sketch of the problem: We have the 2 axis, $x$ and $y$, the $x$ normally is parallel to the ground and the $y$ axis is perpendicular, pointing to the sky. We also draw the initial velocity $v_0$ of the proyectile, and the angle $\theta$ with respect to the ground. Also it's important to notice that the gravity points in the opposite direction of the $y$ axis.
 ```{julia} 
-
 begin 
 	im_1 = load("./06_gravity/images/trajectory.png")
+	plot(im_1)
 end
-
 ```
- *But what are the trayectory of the proyectile? and how the coordinates *x* and *y* evolve with time?*
+ *But what are the trayectory of the proyectile? and how the coordinates $x$ and $y$ evolve with time?*
 
-If we remember from school, the equations of *x* and *y* over time is: 
-
+If we remember from school, the equations of $x$ and $y$ over time is: 
 
 $x(t) = v_0*t*cos(θ)$
 
@@ -64,28 +58,29 @@ where $t$ is the time at which we want to know the coordinates.
 
 *What the equations tell us?*
 
-If we see the evolution of the projectile in the *x* axis only, it follows a straight line (until it hits the ground) and in the *y* axis the movement follows a parabola, but how we interpret that? 
+If we see the evolution of the projectile in the $x$ axis only, it follows a straight line (until it hits the ground) and in the $y$ axis the movement follows a parabola, but how we interpret that? 
 
 We can imagine what happens if we trow a stone to the sky: the stone starts to go up and then, at some point, it reaches the highest position it can go. Then, the stone starts to go down. 
 
 *How does the velocity evolve in this trajectory?*
 
-Since the begining, the velocity starts decreasing until it has the value of 0 at the highest point, where the stone stops for a moment, then it changes its direction and start to increase again, pointing towards the ground. Ploting the evolution of the height of the stone, we obtain the plot shown below.  We see that, at the begining the stone starts to go up fast and then it slows down. We see that for each value of *y* there are 2 values of *t* that satisfies the equation, thats because the stone pass twice for each point, except for the highest value of *y*.
+Since the begining, the velocity starts decreasing until it has the value of 0 at the highest point, where the stone stops for a moment, then it changes its direction and start to increase again, pointing towards the ground. Ploting the evolution of the height of the stone, we obtain the plot shown below.  We see that, at the begining the stone starts to go up fast and then it slows down. We see that for each value of $y$ there are 2 values of $t$ that satisfies the equation, thats because the stone pass twice for each point, except for the highest value of $y$.
 
 ```{julia} 
 begin 
 	im_3 = load("./06_gravity/images/img90_.png")
+	plot(im_3)
 end
 ```
 
-So, in the example we ahve just explained, we have that the throwing angle is θ=90°, so sin(90°)=1, the trajectory in *y* becomes:
+So, in the example we ahve just explained, we have that the throwing angle is θ=90°, so sin(90°)=1, the trajectory in $y$ becomes:
 
 $y(t) = v_0*t -\frac{g*t^2}{2}$
  And the velocity, which is the derivative of the above equation becomes: 
 $v_{y}(t) = v_{0} -g*t$
 
 Those two equations are the ones plotted in the previous sketch, a parabola and a straight line that decreases with time.
- It's worth to notice that at each value *y* of the trajectory, the velocity could have 2 values, just differing in its sign, meaning it can has 2 directions, but with the same magnitude. So keep in mind that when you throw an object to the sky, when it returns to you, the velocity will be the same with the one you threw it.
+ It's worth to notice that at each value $y$ of the trajectory, the velocity could have 2 values, just differing in its sign, meaning it can has 2 directions, but with the same magnitude. So keep in mind that when you throw an object to the sky, when it returns to you, the velocity will be the same with the one you threw it.
  
 ## Calculating the constant g of Mars
 Now that we have understood the equations we will work with, we ask:
@@ -98,26 +93,21 @@ The experiment set up will go like this:
 - Also, for the first iteration of the experiment, suppose we only keep the measurements with and initial angle θ~45° (we will loosen this constrain in a bit). 
 
 ```{julia} 
-
 begin 
 	im = load("./06_gravity/images/sketch_2.png")
+	plot(im)
 end
-
 ```
 Suppose we did the experiment and we have measured then the 5 points, Δx and Δt, shown below:
 ```{julia} 
-
 Δx_measured = [25.94, 38.84, 52.81, 45.54, 17.24]
-
 ```
 ```{julia} 
-
 t_measured = [3.91, 4.57, 5.43, 4.85, 3.15]
-
 ```
 *Now, how we estimate the constant g from those points?*
 
-Using the equations of the trajectory, when the stone hits the ground, y(t) = 0, since we take the start of the *y* coordinate in the ground (negleting the initial height with respect to the maximum height), so finding the other then the initial point that fulfill this equation, we find that:
+Using the equations of the trajectory, when the stone hits the ground, y(t) = 0, since we take the start of the $y$ coordinate in the ground (negleting the initial height with respect to the maximum height), so finding the other then the initial point that fulfill this equation, we find that:
 
 $t_{f} = \frac{2*v_{0}*sin(θ)}{g}$
 
@@ -140,19 +130,19 @@ So, the model we are going to propose is a **linear regression**. A linear equat
 
 $y=m*x +b$
 
-where *m* is the slope of the curve and *b* is called the intercept. In our case, if we take *x* to be $\frac{t_{f}^2}{2}$, the slope of the curve is g and the intercep is 0. So, in our linear model we are going to propose that each point in the curve is:
+where $m$ is the slope of the curve and $b$ is called the intercept. In our case, if we take $x$ to be $\frac{t_{f}^2}{2}$, the slope of the curve is g and the intercep is 0. So, in our linear model we are going to propose that each point in the curve is:
 
 $\mu = m*x + b$
 
 $y \sim Normal(\mu,\sigma^2)$
 
 So, what this says is that each point of the regresion is drawn from a gaussian distribution with its center correnponding with a point in the line, as shown in the plot below.
-```{julia} 
 
+```{julia} 
 begin 
 	im_4 = load("./06_gravity/images/line_.png")
+	plot(im_4)
 end
-
 ```
  So, our linear model will be:
 
@@ -161,21 +151,21 @@ $\mu[i] = g*\frac{t_{f}^2[i]}{2}$
 $\Delta x[i]= Normal(\mu[i],\sigma^2)$
 
 
-Where *g* has a distribution we will propose next. The first distribution we are going to propose is a *Uniform distribution* for g, between the values of 0 and 10
-```{julia} 
+Where $g$ has a distribution we will propose next. The first distribution we are going to propose is a uniform distribution for g, between the values of 0 and 10
 
+```{julia} 
 begin
+using Turing
+using StatsPlots
 plot(Uniform(0,10),xlim=(-1,11), ylim=(0,0.2), legend=false, fill=(0, .5,:lightblue))
 title!("Uniform prior distribution for g")
 xlabel!("g_mars")
 ylabel!("Probability")
 end
-
 ```
 Now we define the model in Turing and sample from the posterior distribution.
 
 ```{julia,results = FALSE} 
-
 begin
 @model gravity_uniform(t_final, x_final, θ) = begin
     # The number of observations.
@@ -188,57 +178,47 @@ begin
 	    end
 end;
 end
-
 ```
 
 ```{julia,results = FALSE} 
-
 begin
 iterations = 10000
 ϵ = 0.05
 τ = 10
 end;
-
 ```
 
 ```{julia,results = FALSE} 
-
 begin
 θ = 45
 chain_uniform = sample(gravity_uniform(t_measured, Δx_measured, θ), HMC(ϵ, τ), iterations, progress=false);
 end;
-
 ```
 
 Plotting the posterior distribution for p we that the values are mostly between 2 and 5, with the maximun near 3,8. Can we narrow the values we obtain?
 
 ```{julia} 
-
 begin
 	histogram(chain_uniform[:g], xlim=[1,6], legend=false, normalized=true)
 	xlabel!("g_mars")
 	title!("Posterior distribution for g with uniform distribution")
 end
-
 ```
 
-As a second obtion, we can propose a *Gaussian distribution* instead of a uniforn distribution for *g*, like the one shown below, with a mean of 5 and a variance of 2, and let the model update its beliefs with the points we have.
+As a second obtion, we can propose a Gaussian distribution instead of a uniforn distribution for $g$, like the one shown below, with a mean of 5 and a variance of 2, and let the model update its beliefs with the points we have.
 
 ```{julia} 
-
 begin
 plot(Normal(5,2), legend=false, fill=(0, .5,:lightblue))
 title!("Normal prior distribution for g")
 xlabel!("g_mars")
 ylabel!("Probability")
 end
-
 ```
 
- We define then the model with a gaussian distribution as a prior for *g*:
+ We define then the model with a gaussian distribution as a prior for $g$:
  
 ```{julia,results = FALSE} 
-
 begin
 @model gravity_normal(t_final, x_final, θ) = begin
     # The number of observations.
@@ -251,35 +231,30 @@ begin
 	    end
 end;
 end
-
 ```
 
 Now we sample values from the posterior distribution and plot and histogram with the values obtained:
 
 ```{julia,results = FALSE} 
-
 begin
 chain_normal = sample(gravity_normal(t_measured, Δx_measured, θ), HMC(ϵ, τ), iterations, progress=false);
 end;
-
 ```
-```{julia} 
 
+```{julia} 
 begin
 	histogram(chain_normal[:g], xlim=[3,4.5],legend=false, normalized=true)
 	xlabel!("g_mars")
 	title!("Posterior distribution for g with Normal distribution")
 
 end
-
 ```
 We see that the plausible values for the gravity have a clear center in 3.7 and now the distribution is narrower, that's good, but we can do better.
 
-If we observe the prior distribution proposed of *g*, we see that some values are negative, which has no sense because if that would the case when you trow the stone, it would go up and up, escaping from the planet. 
+If we observe the prior distribution proposed of $g$, we see that some values are negative, which has no sense because if that would the case when you trow the stone, it would go up and up, escaping from the planet. 
 
 We propose then a new model for not allowing the negative values to happen. The distribution we are interested in is a LogNormal distribution. In the plot below is the prior distribution for g, a LogNormal distribution with mean 1.5 and variance of 0.5.
 ```{julia} 
-
 begin
 plot(LogNormal(1,0.5), xlim=(0,10), legend=false, fill=(0, .5,:lightblue))
 title!("Prior LogNormal Distribution for g")
@@ -291,7 +266,6 @@ end
 The model *gravity_lognormal* defined below has now a LogNormal prior. We sample the posterior distribution after updating with the data measured.
 
 ```{julia,results = FALSE} 
-
 begin
 @model gravity_lognormal(t_final, x_final, θ) = begin
     # The number of observations.
@@ -306,18 +280,15 @@ end
 ```
 
 ```{julia,results = FALSE} 
-
 begin
 chain_lognormal = sample(gravity_lognormal(t_measured, Δx_measured, θ), HMC(ϵ, τ), iterations, progress=false);
 end;
-
 ```
 
 ```{julia} 
-
 begin
 	histogram(chain_lognormal[:g], xlim=[3,4.5], legend=false, normalized=true)
-		xlabel!("g_mars")
+	xlabel!("g_mars")
 	title!("Posterior distribution for g with LogNormal distribution")
 
 end
@@ -327,14 +298,14 @@ end
 Now that we have a good understanding of the equations and the overall problem, we are going to add some difficulties and we will loosen a constrain we have imposed: Suppose that the device employed to measure the angle has an error of 15°, no matter the angle. 
 
 *We want to know what are the most convenient angle to do the experiment and to measure or if it doesn't matter.*
-To do the analysis we need to see how the angle influence the computation of *g*, so solving the equation for *g* we have:
+
+To do the analysis we need to see how the angle influence the computation of $g$, so solving the equation for $g$ we have:
 
 $g = \frac{2*tg(\theta)*\Delta x}{t^{2}_f}$
 
 We can plot then the tangent of θ, with and error of 15° and see what is its maximum and minimun value:
 
 ```{julia} 
-
 begin
 angles = 0:0.1:70
 error = 15/2
@@ -350,7 +321,6 @@ end
 But we don't care about the absolute value of the error, we want the relavite error, so plotting the percentual error we have:
 
 ```{julia} 
-
 begin
 er= tan.(deg2rad.(angles .+ error)) .- tan.(deg2rad.(angles .- error))
 perc_error = er .* 100 ./ μ
@@ -363,10 +333,9 @@ end
 ```
 
 So, now we see that the lowest percentual error is obtained when we work in angles near 45°, so we are good to go and we can use the data we measured adding the error in the angle.
-We now define the new model, where we include an **uncertainty in the angle**. We propose an *Uniform prior* for the angle centered at 45°, the angle we think the measurement was done.
+We now define the new model, where we include an uncertainty in the angle. We propose an uniform prior for the angle centered at 45°, the angle we think the measurement was done.
 
 ```{julia,results = FALSE} 
-
 begin
 @model gravity_angle_uniform(t_final, x_final, θ) = begin
     # The number of observations.
@@ -381,25 +350,21 @@ begin
 	    end
 end;
 end
-
 ```
 
 ```{julia,results = FALSE} 
-
 begin
 chain_uniform_angle = sample(gravity_angle_uniform(t_measured, Δx_measured, θ), HMC(ϵ, τ), iterations, progress=false);
 end;
-
 ```
-```{julia} 
 
+```{julia} 
 begin
 	histogram(chain_uniform_angle[:g], legend=false, normalized=true)
 	xlabel!("g_mars")
 	ylabel!("Probability")
 	title!("Posterior distribution for g, including uncertainty in the angle")
 end
-
 ```
 
 ### Calculating the escape velocity
@@ -425,7 +390,6 @@ $\frac{v_{Mars}}{11} =\sqrt{\frac{g_{Mars}*2*\cancel{R_{Mars}}}{9.8*\cancel{R_{M
 $v_{Mars} =11 * \sqrt{\frac{g_{Mars}}{9.8*2}} \qquad \left[\frac{km}{s} \right]$
 
 ```{julia} 
-
 begin
 	v = 11 .* sqrt.(chain_uniform_angle[:g] ./ (9.8*2))
 	histogram(v, legend=false, normalized=true)
@@ -434,8 +398,8 @@ begin
 	ylabel!("Probability")
 	
 end
-
 ```
+
 Finally, we obtained the escape velocity scape from Mars.
 
 ## Summary
