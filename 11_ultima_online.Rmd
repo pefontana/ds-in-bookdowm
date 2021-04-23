@@ -3,6 +3,10 @@
 # Ultima online
 
 ```{julia chapter_11_libraries, cache = TRUE , results = FALSE, echo=FALSE}
+cd("./11_ultima_online/") 
+import Pkg
+Pkg.activate(".")
+
 using Markdown
 using InteractiveUtils
 using DifferentialEquations
@@ -86,7 +90,7 @@ end;
 sol = solve(prob,Tsit5());
 ```
 
-```{julia}
+```{julia chap_11_plot_1}
 plot(sol)
 ```
 
@@ -104,7 +108,7 @@ ultima_online = Array(data)'
 
 Probably seeing this data in a table is not being very enlightening, let's plot it and see if it makes sense with what we have been discussing:
 
-```{julia}
+```{julia chap_11_plot_2}
 begin
 	time = collect(0:2:30)
 	scatter(time, ultima_online[1, :], label="Prey")
@@ -114,7 +118,7 @@ end
 
 Can you spot the pattern? Let's connect the dots to make our work easier
 
-```{julia}
+```{julia chap_11_plot_3}
 begin
 	plot(time, ultima_online[1,:], label=false)
 	plot!(time, ultima_online[2, :], label=false)
@@ -156,7 +160,7 @@ model = fitlv(ultima_online);
 posterior = sample(model, NUTS(.6),10000); 
 ```
 
-```{julia}
+```{julia chap_11_plot_4}
 plot(posterior)
 ```
 
@@ -183,7 +187,7 @@ end;
 
 And now let's solve the system of differential equations for each of the combinations of parameters that we form, saving them in solutions so that later we can use this array in the plotting. You can scroll left and see the solution to the 101 models we propouse (Notice that we add one final model using the mean of each parameter)
 
-```{julia}
+```{julia , results = FALSE}
 begin
 	solutions = []
 	for i in 1:length(birth_prey_)
@@ -201,7 +205,7 @@ end
 
 The last step is simply to plot each of the models we generate. I also added the data points with which we infer all the model, to be able to appreciate the almost perfect fit:
 
-```{julia}
+```{julia chap_11_plot_5}
 begin 
 	#Plotting the differents models we infer
 	plot(solutions[1], alpha=0.2, color="blue")
@@ -271,7 +275,7 @@ end;
 sol_players = solve(prob_players,Tsit5());
 ```
 
-```{julia}
+```{julia chap_11_plot_6}
 plot(sol_players)
 ```
 
@@ -290,7 +294,7 @@ end;
 sol_players_ = solve(prob_players_);
 ```
 
-```{julia}
+```{julia chap_11_plot_7}
 plot(sol_players_, legend=false)
 ```
 
@@ -313,7 +317,7 @@ end;
 sol_crazy_players = solve(prob_crazy_players);
 ```
 
-```{julia}
+```{julia chap_11_plot_8}
 plot(sol_crazy_players, legend=false)
 ```
 
