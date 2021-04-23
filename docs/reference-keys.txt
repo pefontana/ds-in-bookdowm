@@ -33,3 +33,14 @@ image-classification
 ultima-online
 ultima-continued
 time-series
+creating-our-conjectures
+observable-variables-vs-latent-variables
+bayesian-hierarchical-models
+football-analysis
+creating-our-stories
+letting-the-information-flow
+analyzing-the-results
+simulate-possible-realities
+summary-3
+bibliography
+give-us-feedback-3
