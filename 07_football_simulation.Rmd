@@ -244,7 +244,7 @@ end;
 
 As a first measure to analyze, it is interesting to see and quantify (if any) the effect that being local has on the score rate:
 
-```{julia}
+```{julia chap_7_image_1}
 begin
 histogram(post_home, legend=false, title="Posterior distribution of home parameter")
 end
@@ -282,7 +282,7 @@ For example, if we would like to se the posterior distribution of the attack par
 teams[1]
 ```
 
-```{julia}
+```{julia chap_7_image_2}
 histogram(teams_att[1], legend=false, title="Posterior distribution of Burnley´s attack power")
 ```
 
@@ -296,7 +296,7 @@ Comparing it to the attacking power of Manchester City, champion of the Premier 
 teams[11]
 ```
 
-```{julia}
+```{julia chap_7_image_3}
 begin
 	histogram(teams_att[11], legend=false, title="Posterior distribution of Manchester City´s attack power")
 end
@@ -345,7 +345,7 @@ end;
 sorted_names = abbr_names[sorted_att]
 ```
 
-```{julia}
+```{julia chap_7_image_4}
 begin
 	scatter(1:20, teams_att_μ[sorted_att], grid=false, legend=false, yerror=teams_att_σ[sorted_att], color=:blue, title="Premier league 17/18 teams attack power")
 	annotate!([(x, y + 0.238, text(team, 8, :center, :black)) for (x, y, team) in zip(1:20, teams_att_μ[sorted_att], sorted_names)])
@@ -365,7 +365,7 @@ begin
 end
 ```
 
-```{julia}
+```{julia chap_7_image_5}
 begin
 	scatter(1:20, teams_def_μ[sorted_def], grid=false, legend=false, yerror=teams_def_σ[sorted_def], color=:blue, title="Premier league 17/18 teams defence power")
 	annotate!([(x, y + 0.2, text(team, 8, :center, :black)) for (x, y, team) in zip(1:20, teams_def_μ[sorted_def], sorted_names_def)])
@@ -390,7 +390,7 @@ begin
 end
 ```
 
-```{julia}
+```{julia chap_7_image_6}
 begin
 	scatter(teams_att_μ, teams_def_μ, legend=false)
 	annotate!([(x, y + 0.016, text(team, 6, :center, :black)) for (x, y, team) in zip(teams_att_μ, teams_def_μ, abbr_names)])
@@ -431,7 +431,7 @@ begin
 end
 ```
 
-```{julia}
+```{julia chap_7_image_7}
 begin
 	ha1 = histogram(mci_att_post, title="Manchester City attack", legend=false)
 	ha2 = histogram(liv_att_post, title="Liverpool attack", legend=false)
@@ -439,7 +439,7 @@ begin
 end
 ```
 
-```{julia}
+```{julia chap_7_image_8}
 begin
 	hd1 = histogram(mci_def_post, title="Manchester City defense", legend=false)
 	hd2 = histogram(liv_def_post, title="Liverpool defense", legend=false)
@@ -572,7 +572,7 @@ function match_heatmaps(matrix_t1_as_home, matrix_t2_as_home,
 end
 ```
 
-```{julia}
+```{julia chap_7_image_9}
 match_heatmaps(mci_as_home_simulations, liv_as_home_simulations, "Manchester City", "Liverpool")
 ```
 
