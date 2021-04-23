@@ -78,3 +78,14 @@ holt-winters-seasonal-additive-method
 summary-6
 references-5
 give-us-feedback-6
+creating-our-conjectures
+observable-variables-vs-latent-variables
+bayesian-hierarchical-models
+football-analysis
+creating-our-stories
+letting-the-information-flow
+analyzing-the-results
+simulate-possible-realities
+bibliography
+summary-7
+give-us-feedback-7
