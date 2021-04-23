@@ -66,3 +66,15 @@ the-virtual-catastrophe
 summary-5
 references-4
 give-us-feedback-5
+predicting-the-future
+exponential-smoothing
+weighted-average-and-component-form
+optimization-or-fitting-process
+loss-functions
+trend-methods
+holts-linear-trend-method
+seasonality-methods
+holt-winters-seasonal-additive-method
+summary-6
+references-5
+give-us-feedback-6
