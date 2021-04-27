@@ -6,6 +6,7 @@
 cd("./12_ultima_continued/") 
 import Pkg
 Pkg.activate(".")
+Pkg.instantiate()
 
 using DifferentialEquations
 using DiffEqSensitivity
@@ -16,7 +17,7 @@ using OrdinaryDiffEq
 using ModelingToolkit
 using DataDrivenDiffEq
 using LinearAlgebra
-using Optim
+using Optimt
 using DiffEqFlux
 using Flux
 ```
