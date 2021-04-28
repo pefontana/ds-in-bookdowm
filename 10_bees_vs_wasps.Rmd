@@ -1,3 +1,44 @@
-# (PART)  Deep Learning {.unnumbered}
-
 # Image classification
+
+```{julia}
+cd("./10_bees_vs_wasps/") 
+import Pkg
+Pkg.activate(".")
+
+
+using Images
+using Plots
+using ImageMagick
+```
+
+```{julia chap_10_plot_1,echo=FALSE} 
+begin
+	plot(load("10_bees_vs_wasps/images/pollination.jpg"),axis=nothing,border=:none,size=(320,279))
+end
+```
+
+
+```{julia} 
+	#plot(load("10_bees_vs_wasps/images/venn.png"),axis=nothing)
+
+ plot(ImageMagick.load("10_bees_vs_wasps/images/venn.png"),axis=nothing,border=:none,size=(402,264))
+```
+
+
+
+
+```{julia chap_10_plot_4 , echo=FALSE} 
+begin
+	plot(load("10_bees_vs_wasps/images/conv_net.png"),axis=nothing,border=:none,size=(384,323))
+end
+```
+
+
+```julia
+Conv((3, 3), 1=>32, pad=(1,1), relu)
+```
+
+
+```
+Conv((3, 3), 1=>32, pad=(1,1), relu)
+```

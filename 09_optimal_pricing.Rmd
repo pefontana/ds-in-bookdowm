@@ -37,7 +37,7 @@ If the kind of product you intend to produce were already in the market, you cou
 
 We are going to use a known equation to model the relationship between price of a product and the quantity demanded, the equation (1). The figure 1 shows its behavior for some value of *a* and *c*. This equation tell us that the higher the price, the less we sell, and  if we continue rising the price, eventually our product it's so expensive that nobody is interested.
 
-```{julia}
+```{julia chap_9_plot_1}
 begin
 
 a_ = 5000
@@ -67,7 +67,7 @@ In general, a few people concentrate most of the income, and only a little of th
 
 In economics this idea is presented with the Lorentz curve:
 
-```{julia}
+```{julia chap_9_plot_2}
 begin
 function lorenz(y)  
 	n = length(y)
@@ -114,7 +114,7 @@ For example, the price elasticity of demand of a medicine for a terminal illness
 
 While some might argue that chocolate is vital for their life, the difference between these two products is that users of the medicine cannot afford not to consume it. No matter how much the price increases, the nature of their need forces them to buy it anyway. It is said then that the medicine is inelastic, that is, it is not sensitive to price.
 
-```{julia}
+```{julia chap_9_plot_3}
 begin
 	a__ = 500
 	c__ = -0.05
@@ -130,7 +130,7 @@ end
 *Inelastic demand of an important medicine. As it is vital for life the price hardly affects the quantity demanded*
 On the contrary, if we see that the price of chocolates goes up a lot, we will probably stop consuming it, since it is not vital for our health. Well, that's relative.
 
-```{julia}
+```{julia chap_9_plot_4}
 begin
 	a___ = 500
 	c___ = -0.9
@@ -190,7 +190,7 @@ How do we interpret this model?
 
 Remember that Bayesian models always ask us to choose previous distributions for their parameters. In this particular example we propose that *log a* and *c* follow a Cauchy distribution. *Why did we do this?* Basically they are very flat distributions that are going to leave a lot of freedom for the model to learn from the data what the value of the parameters are. 
 
-```{julia}
+```{julia chap_9_plot_5}
 begin
 plot(-10:0.01:10,Cauchy(), xlim=(-10,10),label="Cauchy(0,1)")
 plot!(Normal(), xlim=(-10,10), label="Normal(0,1)")
@@ -233,7 +233,7 @@ begin
 end;
 ```
 
-```{julia}
+```{julia chap_9_plot_6}
 begin
 	post_loga = collect(get(posterior, :loga))
 	post_c = collect(get(posterior, :c))
@@ -277,7 +277,7 @@ end
 ```
 
 Here we are creating an array of as many rows as price values we want to observe and with as many columns as samples we have of each of our log and c parameters, that is, as many columns as models we have at our disposal. Let´s plot them all and se what happen:
-```{julia}
+```{julia chap_9_plot_7}
 begin
 	plot(p,q[:,1], xlim=(1000,6000))
 	for i in collect(1:length(post_c[1]))
@@ -352,7 +352,7 @@ unfav = mxval[1] - std(profit[mxindx[1][1], : ])
 fav = mxval[1] + std(profit[mxindx[1][1], : ])
 ```
 
-```{julia}
+```{julia chap_9_plot_8}
 begin
 s = latexstring("\\mu_{Profit}")
 s2 = latexstring("\\mu_{Profit} \\pm \\sigma_{Profit}")
@@ -387,7 +387,7 @@ In order to see this, it would be interesting to graph the standard deviation of
 std_p = [std(profit[i, : ]) for i in collect(1:length(p))];
 ```
 
-```{julia}
+```{julia chap_9_plot_10}
 plot(p,std_p, legend=false, xlabel = "Price", ylabel= "Std deviation of profit", lw=2)
 ```
 
@@ -421,7 +421,7 @@ unfav_4000 = mean(profit_4000) - std(profit_4000)
 mean(profit_4000) + std(profit_4000)
 ```
 
-```{julia}
+```{julia chap_9_plot_11}
 begin	
 plot(p,mean(profit, dims=2) + std(profit, dims=2),  color = "orange", lw=2, label =s2)
 plot!(p,mean(profit, dims=2), color = "red", lw=4, label="")
